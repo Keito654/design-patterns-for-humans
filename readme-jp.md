@@ -149,17 +149,17 @@ $door2 = DoorFactory::makeDoor(50, 100);
 --------------
 
 現実世界の例
-> Consider the case of a hiring manager. It is impossible for one person to interview for each of the positions. Based on the job opening, she has to decide and delegate the interview steps to different people.
+> 採用マネージャーを考えてください。１人の担当者が全ての面接を行うことは不可能です。求人内容に基づき、面接の手順を決め、複数の担当者に委任する必要があります。
 
 簡単に言えば
-> It provides a way to delegate the instantiation logic to child classes.
+> インスタンス生成のロジックを子クラスに委任する方法を提供します。
 
 Wikipediaによれば
-> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+> Factory Method パターンは、他のクラスのコンストラクタをサブクラスで上書き可能な自分のメソッドに置き換えることで、 アプリケーションに特化したオブジェクトの生成をサブクラスに追い出し、クラスの再利用性を高めることを目的とする。
 
  **プログラム例**
 
-Taking our hiring manager example above. First of all we have an interviewer interface and some implementations for it
+上記の採用マネージャーの例を見てみましょう。まず、面接官のインターフェースと実装を作ります。
 
 ```php
 interface Interviewer
@@ -171,7 +171,7 @@ class Developer implements Interviewer
 {
     public function askQuestions()
     {
-        echo 'Asking about design patterns!';
+        echo 'デザインパターンについて質問します。';
     }
 }
 
@@ -179,18 +179,18 @@ class CommunityExecutive implements Interviewer
 {
     public function askQuestions()
     {
-        echo 'Asking about community building';
+        echo 'コミュニティ構築について質問します。';
     }
 }
 ```
 
-Now let us create our `HiringManager`
+採用マネージャーのクラス`HiringManager`を作成しましょう。
 
 ```php
 abstract class HiringManager
 {
 
-    // Factory method
+    // ファクトリーメソッド
     abstract protected function makeInterviewer(): Interviewer;
 
     public function takeInterview()
@@ -201,7 +201,7 @@ abstract class HiringManager
 }
 
 ```
-Now any child can extend it and provide the required interviewer
+子クラスはファクトリーメソッドを継承し、必要な面接官を作成することができます。
 ```php
 class DevelopmentManager extends HiringManager
 {
@@ -219,35 +219,35 @@ class MarketingManager extends HiringManager
     }
 }
 ```
-and then it can be used as
+そして、次のように利用します。
 
 ```php
 $devManager = new DevelopmentManager();
-$devManager->takeInterview(); // Output: Asking about design patterns
+$devManager->takeInterview(); // 出力: デザインパターンについて質問します。
 
 $marketingManager = new MarketingManager();
-$marketingManager->takeInterview(); // Output: Asking about community building.
+$marketingManager->takeInterview(); // 出力: コミュニティ構築について質問します。
 ```
 
 **いつ使う？**
 
-Useful when there is some generic processing in a class but the required sub-class is dynamically decided at runtime. Or putting it in other words, when the client doesn't know what exact sub-class it might need.
+クラスに汎用的な処理があるが、必要となる子クラスは実行時に動的に決定される場合に役立ちます。別の言葉で表すと、利用側が必要となる子クラスを正確に知らない場合に便利です。
 
-🔨 Abstract Factory
+🔨 アブストラクトファクトリー
 ----------------
 
 現実世界の例
-> Extending our door example from Simple Factory. Based on your needs you might get a wooden door from a wooden door shop, iron door from an iron shop or a PVC door from the relevant shop. Plus you might need a guy with different kind of specialities to fit the door, for example a carpenter for wooden door, welder for iron door etc. As you can see there is a dependency between the doors now, wooden door needs carpenter, iron door needs a welder etc.
+> シンプルファクトリーで例として挙げたドアを拡張します。ニーズに基づき、木製ドアを木製ドアショップから、鉄のドアを鉄を売る店から、プラスチックのドアをプラスチックの店から入手するでしょう。さらに、ドアを取り付けるため、例えば木製ドアには大工、鉄のドアには溶接工など、さまざまな専門技術を持つ人が必要です。このように、木製ドアは大工が必要、鉄のドアには溶接工が必要など、ドアとの間には依存関係が存在します。
 
 簡単に言えば
-> A factory of factories; a factory that groups the individual but related/dependent factories together without specifying their concrete classes.
+> ファクトリーのファクトリー。独立してるが関連・依存をもつファクトリーを具体的なクラスを指定せずグループ化するファクトリーです。
 
 Wikipediaによれば
-> The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
+> 関連するインスタンス群を生成するための API を集約することによって、利用側がインスタンス群をまとめて変えられるようにし、さらに組み合わせ方を間違えないようにする。
 
 **プログラム例**
 
-Translating the door example above. First of all we have our `Door` interface and some implementation for it
+上記のドアの例を書き換えてみましょう。まず、`Door`インターフェースとその実装を作成します。
 
 ```php
 interface Door
@@ -259,7 +259,7 @@ class WoodenDoor implements Door
 {
     public function getDescription()
     {
-        echo 'I am a wooden door';
+        echo '私は木のドアです。';
     }
 }
 
@@ -267,11 +267,11 @@ class IronDoor implements Door
 {
     public function getDescription()
     {
-        echo 'I am an iron door';
+        echo '私は鉄のドアです。';
     }
 }
 ```
-Then we have some fitting experts for each door type
+次に、各ドアを取り付ける専門家を作ります。
 
 ```php
 interface DoorFittingExpert
@@ -283,7 +283,7 @@ class Welder implements DoorFittingExpert
 {
     public function getDescription()
     {
-        echo 'I can only fit iron doors';
+        echo '私は鉄のドアを取り付けることができます。';
     }
 }
 
@@ -291,12 +291,12 @@ class Carpenter implements DoorFittingExpert
 {
     public function getDescription()
     {
-        echo 'I can only fit wooden doors';
+        echo '私は木のドアを取り付けることができます。';
     }
 }
 ```
 
-Now we have our abstract factory that would let us make family of related objects i.e. wooden door factory would create a wooden door and wooden door fitting expert and iron door factory would create an iron door and iron door fitting expert
+では、今から関連するオブジェクトのグループを作成するアブストラクトファクトリーを作ります。例えば、木のドアのファクトリーは木のドアと木のドアを取り付ける専門家を作成します。一方、鉄のドアのファクトリーは鉄ドア、鉄のドアを取り付ける専門家を作成します。
 ```php
 interface DoorFactory
 {
@@ -304,7 +304,7 @@ interface DoorFactory
     public function makeFittingExpert(): DoorFittingExpert;
 }
 
-// Wooden factory to return carpenter and wooden door
+// 大工と木のドアを返す、木のドアのファクトリー
 class WoodenDoorFactory implements DoorFactory
 {
     public function makeDoor(): Door
@@ -318,7 +318,7 @@ class WoodenDoorFactory implements DoorFactory
     }
 }
 
-// Iron door factory to get iron door and the relevant fitting expert
+// 鉄のドアと関連する専門家を返す、鉄のドアのファクトリー
 class IronDoorFactory implements DoorFactory
 {
     public function makeDoor(): Door
@@ -332,39 +332,39 @@ class IronDoorFactory implements DoorFactory
     }
 }
 ```
-And then it can be used as
+次のように利用します。
 ```php
 $woodenFactory = new WoodenDoorFactory();
 
 $door = $woodenFactory->makeDoor();
 $expert = $woodenFactory->makeFittingExpert();
 
-$door->getDescription();  // Output: I am a wooden door
-$expert->getDescription(); // Output: I can only fit wooden doors
+$door->getDescription();  // 出力: 私は木のドアです。
+$expert->getDescription(); // 出力: 私は木のドアを取り付けることができます。
 
-// Same for Iron Factory
+// 鉄のドアのファクトリー
 $ironFactory = new IronDoorFactory();
 
 $door = $ironFactory->makeDoor();
 $expert = $ironFactory->makeFittingExpert();
 
-$door->getDescription();  // Output: I am an iron door
-$expert->getDescription(); // Output: I can only fit iron doors
+$door->getDescription();  // 出力: 私は鉄のドアです。
+$expert->getDescription(); // 出力: 私は鉄のドアを取り付けることができます。
 ```
 
-As you can see the wooden door factory has encapsulated the `carpenter` and the `wooden door` also iron door factory has encapsulated the `iron door` and `welder`. And thus it had helped us make sure that for each of the created door, we do not get a wrong fitting expert.   
+ご覧の通り、木のドアのファクトリーは`carpenter`と`wooden door`をカプセル化しています。また鉄のドアのファクトリーは`iron door`と`welder`をカプセル化しています。これにより、間違った専門家を取得してしまうことがありません。
 
 **いつ使う？**
 
-When there are interrelated dependencies with not-that-simple creation logic involved
+単純ではない生成ロジックがあり、かつ相互依存関係がある場合
 
-👷 Builder
+👷 ビルダー
 --------------------------------------------
 現実世界の例
-> Imagine you are at Hardee's and you order a specific deal, lets say, "Big Hardee" and they hand it over to you without *any questions*; this is the example of simple factory. But there are cases when the creation logic might involve more steps. For example you want a customized Subway deal, you have several options in how your burger is made e.g what bread do you want? what types of sauces would you like? What cheese would you want? etc. In such cases builder pattern comes to the rescue.
+> マクドナルドで、例えば「ビックバーガー」を注文し、店員が*何も質問せず*商品を手渡すところを想像してください。これはシンプルなファクトリーの例です。ただし生成ロジックに多くの手順が含まれる場合があります。例えば、サブウェイではバーガーの作り方をいくつかのオプションから選ぶことができます。どのパンがいいですか？どの種類のソースがいいですか？どのチーズがいいですか？などです。この場合、ビルダーパターンが役に立ちます。
 
 簡単に言えば
-> Allows you to create different flavors of an object while avoiding constructor pollution. Useful when there could be several flavors of an object. Or when there are a lot of steps involved in creation of an object.
+> コンストラクタ汚染を避けながら、異なったフレーバーをオブジェクトに追加できます。１つのオブジェクトにいろいろなフレーバーがある場合や、オブジェクトの生成に多くの手順が含まれる場合に便利です。
 
 Wikipediaによれば
 > The builder pattern is an object creation software design pattern with the intentions of finding a solution to the telescoping constructor anti-pattern.
