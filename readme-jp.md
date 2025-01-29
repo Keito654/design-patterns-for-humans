@@ -367,9 +367,9 @@ $expert->getDescription(); // 出力: 私は鉄のドアを取り付けること
 > コンストラクタ汚染を避けながら、異なったフレーバーをオブジェクトに追加できます。１つのオブジェクトにいろいろなフレーバーがある場合や、オブジェクトの生成に多くの手順が含まれる場合に便利です。
 
 Wikipediaによれば
-> The builder pattern is an object creation software design pattern with the intentions of finding a solution to the telescoping constructor anti-pattern.
+> ビルダーパターンはテレスコープコンストラクタというアンチパターンに対する解決策を見つけることを目的とした、オブジェクト生成に関するソフトウェアデザインパターンです。
 
-Having said that let me add a bit about what telescoping constructor anti-pattern is. At one point or the other we have all seen a constructor like below:
+ここで、テレスコープコンストラクタのアンチパターンについて少し説明させてください。皆さん一度は以下のようなコンストラクタを見たことがあるでしょう。
 
 ```php
 public function __construct($size, $cheese = true, $pepperoni = true, $tomato = false, $lettuce = true)
@@ -377,11 +377,11 @@ public function __construct($size, $cheese = true, $pepperoni = true, $tomato = 
 }
 ```
 
-As you can see; the number of constructor parameters can quickly get out of hand and it might become difficult to understand the arrangement of parameters. Plus this parameter list could keep on growing if you would want to add more options in future. This is called telescoping constructor anti-pattern.
+ご覧の通り、コンストラクタの引数の数はすぐに手に負えなくなり、引数の配置を理解することが難しくなるでしょう。さらに、将来的にオプションを追加したくなり、この引数のリストは増え続けるでしょう。これをテレスコープコンストラクタ・アンチパターンと呼びます。
 
 **プログラム例**
 
-The sane alternative is to use the builder pattern. First of all we have our burger that we want to make
+まともな代替案として、ビルダーパターンを使うことができます。まず、作りたいバーガーのクラスを作ります。
 
 ```php
 class Burger
@@ -404,7 +404,7 @@ class Burger
 }
 ```
 
-And then we have the builder
+そして、ビルダーを作ります。
 
 ```php
 class BurgerBuilder
@@ -451,7 +451,7 @@ class BurgerBuilder
     }
 }
 ```
-And then it can be used as:
+以下のように使用します。
 
 ```php
 $burger = (new BurgerBuilder(14))
@@ -463,7 +463,7 @@ $burger = (new BurgerBuilder(14))
 
 **いつ使う？**
 
-When there could be several flavors of an object and to avoid the constructor telescoping. The key difference from the factory pattern is that; factory pattern is to be used when the creation is a one step process while builder pattern is to be used when the creation is a multi step process.
+オブジェクトに複数のフレーバーがある可能性があり、テレスコープコンストラクタを避ける場合。ファクトリーパターンとの主な違いは、ファクトリーパターンは生成が1ステップで済む場合に使用され、ビルダーパターンは生成が複数ステップに及ぶ場合に使用することです。
 
 🐑 Prototype
 ------------
