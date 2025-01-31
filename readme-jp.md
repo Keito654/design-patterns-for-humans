@@ -534,22 +534,22 @@ echo $cloned->getCategory(); // ビッグホーン
 
 既存のオブジェクトと似ているオブジェクトが必要な場合。もしくは、クローン化と比べてオブジェクト生成にかかるコストが高い場合。
 
-💍 Singleton
+💍 シングルトン
 ------------
 現実世界の例
-> There can only be one president of a country at a time. The same president has to be brought to action, whenever duty calls. President here is singleton.
+> 国の大統領は一度に1人だけなることができます。任務を行うときはいつでも、同じ大統領が行動を起こさなければなりません。ここでの大統領はシングルトンです。
 
 簡単に言えば
-> Ensures that only one object of a particular class is ever created.
+> 特定のクラスが常に１つだけ作成されるようにします。
 
 Wikipediaによれば
-> In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
+> ソフトウェア開発において、シングルトンパターンはクラスのインスタンス化を１つのオブジェクトのみになるよう制限するデザインパターンです。これはシステム全体の調整をするため１つのオブジェクトだけが必要な場合に役立ちます。
 
-Singleton pattern is actually considered an anti-pattern and overuse of it should be avoided. It is not necessarily bad and could have some valid use-cases but should be used with caution because it introduces a global state in your application and change to it in one place could affect in the other areas and it could become pretty difficult to debug. The other bad thing about them is it makes your code tightly coupled plus mocking the singleton could be difficult.
+シングルトンパターンは実際のところアンチパターンと考えられており、過度の使用は避けるべきです。必ずしも悪いわけではなく、有効な使い方もあるかもしれませんが、注意して使用する必要があります。なぜなら、シングルトンはアプリケーションのグロ‐バルな状態であり、１つの場所でシングルトンを変更すると他の場所にも影響があるからです。これによりデバッグがかなり難しくなります。もう１つの欠点として、コードを密結合にし、シングルトンのモック化を困難にすることが挙げられます。
 
 **プログラム例**
 
-To create a singleton, make the constructor private, disable cloning, disable extension and create a static variable to house the instance
+シングルトンを作成するためには、プライベートコンストラクタを作り、クローン化と継承を無効化し、インスタンスを格納する静的な変数を作ります。
 ```php
 final class President
 {
@@ -557,7 +557,7 @@ final class President
 
     private function __construct()
     {
-        // Hide the constructor
+        // コンストラクタを隠す。
     }
 
     public static function getInstance(): President
@@ -571,16 +571,16 @@ final class President
 
     private function __clone()
     {
-        // Disable cloning
+        // クローンを無効にする
     }
 
     private function __wakeup()
     {
-        // Disable unserialize
+        // unserializeを無効にする
     }
 }
 ```
-Then in order to use
+以下のように利用します。
 ```php
 $president1 = President::getInstance();
 $president2 = President::getInstance();
