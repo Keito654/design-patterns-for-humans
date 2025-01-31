@@ -465,22 +465,22 @@ $burger = (new BurgerBuilder(14))
 
 オブジェクトに複数のフレーバーがある可能性があり、テレスコープコンストラクタを避ける場合。ファクトリーパターンとの主な違いは、ファクトリーパターンは生成が1ステップで済む場合に使用され、ビルダーパターンは生成が複数ステップに及ぶ場合に使用することです。
 
-🐑 Prototype
+🐑 プロトタイプ
 ------------
 現実世界の例
-> Remember dolly? The sheep that was cloned! Lets not get into the details but the key point here is that it is all about cloning
+> ドリーを覚えていますか？羊のクローンです！詳細は省きますが、ここで重要なのは「クローン化」がテーマとだという点です。
 
 簡単に言えば
-> Create object based on an existing object through cloning.
+> クローン化することで、既存のオブジェクトに基づき新しいオブジェクトを作成します。
 
 Wikipediaによれば
-> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+> プロトタイプパターンはソフトウェア開発における生成のデザインパターンです。生成するオブジェクトのタイプがプロトタイプから決定され、そのインスタンスがクローンされて新しいオブジェクトが生成される場合に使われます。
 
-In short, it allows you to create a copy of an existing object and modify it to your needs, instead of going through the trouble of creating an object from scratch and setting it up.
+つまり、オブジェクトを１から作成し設定する手間をかけるのではなく、既存のオブジェクトのコピーを作成し必要に応じて変更を加えることです。
 
 **プログラム例**
 
-In PHP, it can be easily done using `clone`
+PHPでは、`clone`を使うことで簡単に実行できます。
 
 ```php
 class Sheep
@@ -488,7 +488,7 @@ class Sheep
     protected $name;
     protected $category;
 
-    public function __construct(string $name, string $category = 'Mountain Sheep')
+    public function __construct(string $name, string $category = 'ビッグホーン')
     {
         $this->name = $name;
         $this->category = $category;
@@ -515,24 +515,24 @@ class Sheep
     }
 }
 ```
-Then it can be cloned like below
+このオブジェクトは以下のようにクローンできます。
 ```php
-$original = new Sheep('Jolly');
-echo $original->getName(); // Jolly
-echo $original->getCategory(); // Mountain Sheep
+$original = new Sheep('ジョリー');
+echo $original->getName(); // ジョリー
+echo $original->getCategory(); // ビッグホーン
 
-// Clone and modify what is required
+// クローンし、必要な変更を行います
 $cloned = clone $original;
-$cloned->setName('Dolly');
-echo $cloned->getName(); // Dolly
-echo $cloned->getCategory(); // Mountain sheep
+$cloned->setName('ドリー');
+echo $cloned->getName(); // ドリー
+echo $cloned->getCategory(); // ビッグホーン
 ```
 
-Also you could use the magic method `__clone` to modify the cloning behavior.
+また、マジックメソッド`__clone`を使用してクローンの動作を変更することも可能です。
 
 **いつ使う？**
 
-When an object is required that is similar to existing object or when the creation would be expensive as compared to cloning.
+既存のオブジェクトと似ているオブジェクトが必要な場合。もしくは、クローン化と比べてオブジェクト生成にかかるコストが高い場合。
 
 💍 Singleton
 ------------
