@@ -604,10 +604,10 @@ Wikipediaによれば
  * [フライウェイト](#-flyweight)
  * [プロキシ](#-proxy)
 
-🔌 Adapter
+🔌 アダプター
 -------
 現実世界の例
-> Consider that you have some pictures in your memory card and you need to transfer them to your computer. In order to transfer them you need some kind of adapter that is compatible with your computer ports so that you can attach memory card to your computer. In this case card reader is an adapter.
+> SDカードに写真があり、パソコンに転送する必要がある場面を考えてください。写真を転送するため、パソコンのポートと互換性があるアダプターが必要です。これによりパソコンにSDカードを接続することができます。この場合、カードリーダーがアダプターとなります。
 > Another example would be the famous power adapter; a three legged plug can't be connected to a two pronged outlet, it needs to use a power adapter that makes it compatible with the two pronged outlet.
 > Yet another example would be a translator translating words spoken by one person to another
 
