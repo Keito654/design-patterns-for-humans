@@ -18,18 +18,18 @@
 
 <br>
 
-|[生成に関するデザインパターン](#creational-design-patterns)|[構造に関するデザインパターン](#structural-design-patterns)|[振る舞いに関するデザインパターン](#behavioral-design-patterns)|
+|[生成に関するデザインパターン](#生成に関するデザインパターン)|[構造に関するデザインパターン](#構造に関するデザインパターン)|[振る舞いに関するデザインパターン](#振る舞いに関するデザインパターン)|
 |:-|:-|:-|
-|[シンプルファクトリー](#-simple-factory)|[アダプター](#-adapter)|[責任の連鎖/チェイン・レスポンシビリティ](#-chain-of-responsibility)|
-|[ファクトリーメソッド](#-factory-method)|[ブリッジ](#-bridge)|[コマンド](#-command)|
-|[アブストラクトファクトリー](#-abstract-factory)|[コンポジット](#-composite)|[イテレーター](#-iterator)|
-|[ビルダー](#-builder)|[デコレーター](#-decorator)|[メディエーター](#-mediator)|
-|[プロトタイプ](#-prototype)|[ファサード](#-facade)|[メメント](#-memento)|
-|[シングルトン](#-singleton)|[フライウェイト](#-flyweight)|[オブザーバー](#-observer)|
-||[プロキシ](#-proxy)|[ビジター](#-visitor)|
-|||[ストラテジ](#-strategy)|
-|||[ステート](#-state)|
-|||[テンプレートメソッド](#-template-method)|
+|[シンプルファクトリー](#-シンプルファクトリー)|[アダプター](#-アダプター)|[チェイン・レスポンシビリティ](#-チェイン・レスポンシビリティ)|
+|[ファクトリーメソッド](#-ファクトリーメソッド|[ブリッジ](#-ブリッジ)|[コマンド](#-コマンド)|
+|[アブストラクトファクトリー](#-アブストラクトファクトリー)|[コンポジット](#-コンポジット)|[イテレーター](#-イテレーター)|
+|[ビルダー](#-ビルダー)|[デコレーター](#-デコレーター)|[メディエーター](#-メディエーター)|
+|[プロトタイプ](#-プロトタイプ)|[ファサード](#-ファサード)|[メメント](#-メメント)|
+|[シングルトン](#-シングルトン)|[フライウェイト](#-フライウェイト)|[オブザーバー](#-オブザーバー)|
+||[プロキシ](#-プロキシ)|[ビジター](#-ビジター)|
+|||[ストラテジ](#-ストラテジ)|
+|||[ステート](#-ステート)|
+|||[テンプレートメソッド](#-テンプレートメソッド)|
 
 <br>
 
@@ -56,9 +56,9 @@ Wikipediaでは次のように説明されています。
 デザインパターンの種類
 -----------------
 
-* [生成](#creational-design-patterns)
-* [構造](#structural-design-patterns)
-* [振る舞い](#behavioral-design-patterns)
+* [生成](#生成に関するデザインパターン)
+* [構造](#構造に関するデザインパターン)
+* [振る舞い](#振る舞いに関するデザインパターン)
 
 生成に関するデザインパターン
 ==========================
@@ -69,12 +69,12 @@ Wikipediaでは次のように説明されています。
 Wikipediaによれば
 > ソフトウェア エンジニアリングにおいて、生成に関するデザインパターンは、オブジェクトを作成するメカニズムを扱い、状況に適した方法でオブジェクトを作成しようとするデザインパターンです。オブジェクト生成の基本的な形式は、設計上の問題や設計の複雑さの増加につながる可能性があります。生成に関するデザインパターンは、オブジェクト生成を何らかの方法で制御することでこの問題を解決します。
 
- * [シンプルファクトリー](#-simple-factory)
- * [ファクトリーメソッド](#-factory-method)
- * [アブストラクトファクトリー](#-abstract-factory)
- * [ビルダー](#-builder)
- * [プロトタイプ](#-prototype)
- * [シングルトン](#-singleton)
+ * [シンプルファクトリー](#-シンプルファクトリー)
+ * [ファクトリーメソッド](#-ファクトリーメソッド)
+ * [アブストラクトファクトリー](#-アブストラクトファクトリー)
+ * [ビルダー](#-ビルダー)
+ * [プロトタイプ](#-プロトタイプ)
+ * [シングルトン](#-シングルトン)
 
 🏠 シンプルファクトリー
 --------------
@@ -588,21 +588,21 @@ $president2 = President::getInstance();
 var_dump($president1 === $president2); // true
 ```
 
-Structural Design Patterns
+構造に関するデザインパターン
 ==========================
 簡単に言えば
-> Structural patterns are mostly concerned with object composition or in other words how the entities can use each other. Or yet another explanation would be, they help in answering "How to build a software component?"
+> 構造に関するパターンは主にオブジェクトの構成、言い換えるとエンティティがお互いをどのように利用するかに関係しています。別の説明をすると、これらは「ソフトウェアの構成要素をどのように組み立てていくか」に答えるのに役立ちます。
 
 Wikipediaによれば
-> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
+> ソフトウェアエンジニアリングにおいて、構造に関するデザインパターンはエンティティ同士をシンプルに構築する方法を見つけ、設計を容易にするパターンです。
 
- * [Adapter](#-adapter)
- * [Bridge](#-bridge)
- * [Composite](#-composite)
- * [Decorator](#-decorator)
- * [Facade](#-facade)
- * [Flyweight](#-flyweight)
- * [Proxy](#-proxy)
+ * [アダプター](#-adapter)
+ * [ブリッジ](#-bridge)
+ * [コンポジット](#-composite)
+ * [デコレーター](#-decorator)
+ * [ファサード](#-facade)
+ * [フライウェイト](#-flyweight)
+ * [プロキシ](#-proxy)
 
 🔌 Adapter
 -------
