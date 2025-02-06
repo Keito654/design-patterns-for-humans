@@ -608,20 +608,20 @@ Wikipediaによれば
 -------
 現実世界の例
 > SDカードに写真があり、パソコンに転送する必要がある場面を考えてください。写真を転送するため、パソコンのポートと互換性があるアダプターが必要です。これによりパソコンにSDカードを接続することができます。この場合、カードリーダーがアダプターとなります。
-> Another example would be the famous power adapter; a three legged plug can't be connected to a two pronged outlet, it needs to use a power adapter that makes it compatible with the two pronged outlet.
-> Yet another example would be a translator translating words spoken by one person to another
+> 別のよく知られる例として、電源アダプターがあります。三本脚のプラグは、2つの穴しかないコンセントには接続できません。2つ穴のコンセントに適合する電源アタプターを使う必要があります。
+> さらに別の例として、ある人が話した言葉を別の人に翻訳する翻訳者が挙げられます。
 
 簡単に言えば
-> Adapter pattern lets you wrap an otherwise incompatible object in an adapter to make it compatible with another class.
+> アダプターパターンは互換性のないオブジェクトをアダプターで包み、別のクラスと互換性を持たせることができます。
 
 Wikipediaによれば
-> In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface. It is often used to make existing classes work with others without modifying their source code.
+> ソフトウェア開発において、アダプターパターンは既存のクラスのインターフェースを別のクラスのインターフェースとして扱えるようにするデザインパターンです。これは、ソースコードを変更せずに既存のクラスと他のクラスを連携させる際によく使われます。
 
 **プログラム例**
 
-Consider a game where there is a hunter and he hunts lions.
+ハンターがいて、ライオンを狩るゲームを考えてみましょう。
 
-First we have an interface `Lion` that all types of lions have to implement
+まず、すべての種類のライオンのクラスが利用する必要がある`Lion`インターフェースがあります。
 
 ```php
 interface Lion
@@ -643,7 +643,7 @@ class AsianLion implements Lion
     }
 }
 ```
-And hunter expects any implementation of `Lion` interface to hunt.
+ハンターは狩りを行うため、`Lion`インターフェースが実装されていることを期待します。
 ```php
 class Hunter
 {
@@ -654,10 +654,10 @@ class Hunter
 }
 ```
 
-Now let's say we have to add a `WildDog` in our game so that hunter can hunt that also. But we can't do that directly because dog has a different interface. To make it compatible for our hunter, we will have to create an adapter that is compatible
+今、ハンターにとって狩猟対象である、野犬（`WildDog`クラス）をゲームに追加するとします。しかし、犬はライオンとは異なるインターフェースを持つため、そのまま追加することはできません。ハンターと互換性を持たせるため、適合するアダプターを作成する必要があるでしょう。
 
 ```php
-// This needs to be added to the game
+// これをゲームに追加する必要がある。
 class WildDog
 {
     public function bark()
@@ -665,7 +665,7 @@ class WildDog
     }
 }
 
-// Adapter around wild dog to make it compatible with our game
+// ゲームとの互換性を与えるための、犬クラスのアダプター
 class WildDogAdapter implements Lion
 {
     protected $dog;
@@ -681,7 +681,7 @@ class WildDogAdapter implements Lion
     }
 }
 ```
-And now the `WildDog` can be used in our game using `WildDogAdapter`.
+これで、`WildDog`は`WildDogAdapter`を通してゲームで使用できるようになりました。
 
 ```php
 $wildDog = new WildDog();
