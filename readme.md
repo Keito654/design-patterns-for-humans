@@ -1412,34 +1412,34 @@ $bank->pay(259);
 -------
 
 現実世界の例
-> 一般的な例は、レストランで食事を注文する場面です。あなた(=`Client`)はウェイター(=`Invoker`)に食事を持ってきてと頼みます(=`Command`)。そしてウェイターは何をどのように調理するか知っているシェフ(=`Receiver`)に注文を通します。
-> 別の例として、あなた(=`Client`)がテレビ(=`Receiver`)の電源をオンにする(=`Command`)ため、リモコン(=`Invoker`)を使うことが挙げられます。
+> 一般的な例は、レストランで食事を注文する場面です。あなた(=`利用者/Client`)はウェイター(=`起動者/Invoker`)に食事を持ってきてと頼みます(=`コマンド/Command`)。そしてウェイターは何をどのように調理するか知っているシェフ(=`受信者/Receiver`)に注文を通します。
+> 別の例として、あなた(=`利用者/Client`)がテレビ(=`受信者/Receiver`)の電源をオンにする(=`コマンド/Command`)ため、リモコン(=`起動者/Invoker`)を使うことが挙げられます。
 
 簡単に言えば
 > 行動をオブジェクトにカプセル化することができます。このパターンの背景にある重要なアイディアは、クライアントと受信者を切り離す手段を提供することです。
 
 Wikipediaによれば
-> In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to encapsulate all information needed to perform an action or trigger an event at a later time. This information includes the method name, the object that owns the method and values for the method parameters.
+> オブジェクト指向プログラミングにおいて、コマンドパターンはオブジェクトを利用し、アクションを実行したり、イベントを後で発火させるための情報すべてをカプセル化する、振る舞いに関するデザインパターンです。この情報にはメソッド名、メソッドを所有するオブジェクト、メソッドの引数の値が含まれます。
 
 **プログラム例**
 
-First of all we have the receiver that has the implementation of every action that could be performed
+まず、実行可能な全てのアクションを実装した受信者(Receiver)を作成します。
 ```php
-// Receiver
+// 受信者
 class Bulb
 {
     public function turnOn()
     {
-        echo "Bulb has been lit";
+        echo "灯がつきました!";
     }
 
     public function turnOff()
     {
-        echo "Darkness!";
+        echo "真っ暗です！";
     }
 }
 ```
-then we have an interface that each of the commands are going to implement and then we have a set of commands
+次に、コマンドのインターフェースを作り、その後コマンドを実装します。
 ```php
 interface Command
 {
@@ -1448,7 +1448,7 @@ interface Command
     public function redo();
 }
 
-// Command
+// コマンド
 class TurnOn implements Command
 {
     protected $bulb;
@@ -1499,7 +1499,7 @@ class TurnOff implements Command
     }
 }
 ```
-Then we have an `Invoker` with whom the client will interact to process any commands
+そして、利用者がコマンドを実行するために対話する起動者(Invoker)を追加します。
 ```php
 // Invoker
 class RemoteControl
@@ -1510,7 +1510,7 @@ class RemoteControl
     }
 }
 ```
-Finally let's see how we can use it in our client
+最後に、利用者(client)を作ります。どのように起動者を利用するか確認しましょう。
 ```php
 $bulb = new Bulb();
 
@@ -1518,11 +1518,11 @@ $turnOn = new TurnOn($bulb);
 $turnOff = new TurnOff($bulb);
 
 $remote = new RemoteControl();
-$remote->submit($turnOn); // Bulb has been lit!
-$remote->submit($turnOff); // Darkness!
+$remote->submit($turnOn); // 灯がつきました!
+$remote->submit($turnOff); // 真っ暗です!
 ```
 
-Command pattern can also be used to implement a transaction based system. Where you keep maintaining the history of commands as soon as you execute them. If the final command is successfully executed, all good otherwise just iterate through the history and keep executing the `undo` on all the executed commands.
+コマンドパターンはトランザクションが必要なシステムを実装する際にも用いられます。コマンドを実行するとすぐに、コマンドの履歴が保存されます。最後のコマンドが成功した場合問題ありませんが、それ以外の場合、履歴を遡り、実行されたすべてのコマンドに`元に戻す/undo`を行うことができます。
 
 ➿ Iterator
 --------
