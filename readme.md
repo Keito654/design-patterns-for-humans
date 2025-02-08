@@ -691,7 +691,7 @@ $hunter = new Hunter();
 $hunter->hunt($wildDogAdapter);
 ```
 
-🚡 Bridge
+🚡 ブリッジ
 ------
 現実世界の例
 > 複数のページがあるWebサイトがあり、ユーザーがテーマを変えられるようにしたい場合を考えてください。どのように実装しますか？各ページを、各テーマ分複製しますか？それともテーマだけを作成し、ユーザーの好みに応じてテーマを読み込むようにしますか？ブリッジパターンを利用すると、2つ目の例のことが可能になります。
@@ -786,21 +786,21 @@ echo $about->getContent(); // "アバウトページのテーマ：ダークブ�
 echo $careers->getContent(); // "キャリアページのテーマ：ダークブラック;
 ```
 
-🌿 Composite
+🌿 コンポジット
 -----------------
 
 現実世界の例
-> Every organization is composed of employees. Each of the employees has the same features i.e. has a salary, has some responsibilities, may or may not report to someone, may or may not have some subordinates etc.
+> すべての組織は従業員で構成されています。各従業員は同じ特徴があります。例えば、給料がある、何らかの責任がある、誰にかに報告する/しない、部下を持つ/もたない、などです。
 
 簡単に言えば
-> Composite pattern lets clients treat the individual objects in a uniform manner.
+> コンポジットパターンを利用すると、利用者は個々のオブジェクトを均一的な方法で処理できます。
 
 Wikipediaによれば
-> In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
+> ソフトウェア開発において、コンポジットパターンは分類を行うデザインパターンです。コンポジットパターンを用いることで、オブジェクトのグループを、単一のオブジェクトのインスタンスのように同じ方法で処理できます。コンポジットパターンの目的はオブジェクトをツリー構造になるように「構成する」ことで、部分ー全体の関係をもつ階層構造を表現することです。コンポジットパターンを利用することで、利用者は個々のオブジェクトや構成を均一的に処理できます。
 
 **プログラム例**
 
-Taking our employees example from above. Here we have different employee types
+上の従業員の例を実装していきましょう。異なる型をもつ従業員を作成します。
 
 ```php
 interface Employee
@@ -879,7 +879,7 @@ class Designer implements Employee
 }
 ```
 
-Then we have an organization which consists of several different types of employees
+次に、何種類かの違った型をもつ従業員から構成される組織をつくります。
 
 ```php
 class Organization
@@ -904,19 +904,19 @@ class Organization
 }
 ```
 
-And then it can be used as
+これらは以下のように利用できます。
 
 ```php
-// Prepare the employees
+// 従業員を準備する
 $john = new Developer('John Doe', 12000);
 $jane = new Designer('Jane Doe', 15000);
 
-// Add them to organization
+// 組織に従業員を追加する
 $organization = new Organization();
 $organization->addEmployee($john);
 $organization->addEmployee($jane);
 
-echo "Net salaries: " . $organization->getNetSalaries(); // Net Salaries: 27000
+echo "給与の手取り: " . $organization->getNetSalaries(); // 給与の手取り: 27000
 ```
 
 ☕ Decorator
