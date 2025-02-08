@@ -694,19 +694,19 @@ $hunter->hunt($wildDogAdapter);
 🚡 Bridge
 ------
 現実世界の例
-> Consider you have a website with different pages and you are supposed to allow the user to change the theme. What would you do? Create multiple copies of each of the pages for each of the themes or would you just create separate theme and load them based on the user's preferences? Bridge pattern allows you to do the second i.e.
+> 複数のページがあるWebサイトがあり、ユーザーがテーマを変えられるようにしたい場合を考えてください。どのように実装しますか？各ページを、各テーマ分複製しますか？それともテーマだけを作成し、ユーザーの好みに応じてテーマを読み込むようにしますか？ブリッジパターンを利用すると、2つ目の例のことが可能になります。
 
 ![With and without the bridge pattern](https://cloud.githubusercontent.com/assets/11269635/23065293/33b7aea0-f515-11e6-983f-98823c9845ee.png)
 
 簡単に言えば
-> Bridge pattern is about preferring composition over inheritance. Implementation details are pushed from a hierarchy to another object with a separate hierarchy.
+> ブリッジパターンは継承よりも合成を優先します。詳細の実装はある階層から分割された階層をもつ別のオブジェクトへと送られます。
 
 Wikipediaによれば
-> The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently"
+> ブリッジパターンはソフトウェア開発で利用されるデザインパターンです。抽象と実装を切り離すことで、それぞれが独立して変化できるようにすることを目的としています。
 
 **プログラム例**
 
-Translating our WebPage example from above. Here we have the `WebPage` hierarchy
+上のWebサイトの例をコードにしていきましょう。Webページの階層である`WebPage`とその実装を作ります。
 
 ```php
 interface WebPage
@@ -726,7 +726,7 @@ class About implements WebPage
 
     public function getContent()
     {
-        return "About page in " . $this->theme->getColor();
+        return "アバウトページのテーマ：" . $this->theme->getColor();
     }
 }
 
@@ -741,11 +741,11 @@ class Careers implements WebPage
 
     public function getContent()
     {
-        return "Careers page in " . $this->theme->getColor();
+        return "キャリアページのテーマ：" . $this->theme->getColor();
     }
 }
 ```
-And the separate theme hierarchy
+そして、テーマの階層を分割し作成します。
 ```php
 
 interface Theme
@@ -757,33 +757,33 @@ class DarkTheme implements Theme
 {
     public function getColor()
     {
-        return 'Dark Black';
+        return 'ダークブラック';
     }
 }
 class LightTheme implements Theme
 {
     public function getColor()
     {
-        return 'Off white';
+        return 'オフホワイト';
     }
 }
 class AquaTheme implements Theme
 {
     public function getColor()
     {
-        return 'Light blue';
+        return 'ライトブルー';
     }
 }
 ```
-And both the hierarchies
+2つの階層を利用します。
 ```php
 $darkTheme = new DarkTheme();
 
 $about = new About($darkTheme);
 $careers = new Careers($darkTheme);
 
-echo $about->getContent(); // "About page in Dark Black";
-echo $careers->getContent(); // "Careers page in Dark Black";
+echo $about->getContent(); // "アバウトページのテーマ：ダークブラック";
+echo $careers->getContent(); // "キャリアページのテーマ：ダークブラック;
 ```
 
 🌿 Composite
