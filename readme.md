@@ -919,22 +919,22 @@ $organization->addEmployee($jane);
 echo "給与の手取り: " . $organization->getNetSalaries(); // 給与の手取り: 27000
 ```
 
-☕ Decorator
+☕ デコレーター
 -------------
 
 現実世界の例
 
-> Imagine you run a car service shop offering multiple services. Now how do you calculate the bill to be charged? You pick one service and dynamically keep adding to it the prices for the provided services till you get the final cost. Here each type of service is a decorator.
+> 複数のサービスを提供する自動車サービス店を経営することを想像してください。請求額をどのように計算しますか？1つのサービスを選び、提供されたサービスの価格を動的に追加し続けることで、最終的な金額を得ることができます。ここでの各サービスの種類がデコレーターです。
 
 簡単に言えば
-> Decorator pattern lets you dynamically change the behavior of an object at run time by wrapping them in an object of a decorator class.
+> デコレーターパターンは対象のオブジェクトをデコレータークラスで包むことにより、振る舞いを動的に変化させることを可能とします。
 
 Wikipediaによれば
-> In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
+> オブジェクト指向プログラミングにおいて、デコレーターパターンは、同じクラスから作られた他のオブジェクトの振る舞いに影響を与えることなく、静的もしくは動的に個々のオブジェクトに振る舞いを追加することを可能とします。デコレーターパターンは機能を固有の関心事をもつクラスに分けられるため、単一責任の原則を守ることに役立ちます。
 
 **プログラム例**
 
-Lets take coffee for example. First of all we have a simple coffee implementing the coffee interface
+コーヒーを例に考えてみましょう。まず、コーヒーのインターフェースを実装したシンプルなコーヒークラスを作成します。
 
 ```php
 interface Coffee
@@ -952,11 +952,11 @@ class SimpleCoffee implements Coffee
 
     public function getDescription()
     {
-        return 'Simple coffee';
+        return 'シンプルなコーヒー';
     }
 }
 ```
-We want to make the code extensible to allow options to modify it if required. Lets make some add-ons (decorators)
+あなたは必要があれば変更可能なオプションをつけるため、コードを拡張したくなりました。いくつか、アドオン（デコレーター）を作りましょう。
 ```php
 class MilkCoffee implements Coffee
 {
@@ -974,7 +974,7 @@ class MilkCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . ', milk';
+        return $this->coffee->getDescription() . ', ミルク';
     }
 }
 
@@ -994,7 +994,7 @@ class WhipCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . ', whip';
+        return $this->coffee->getDescription() . ', ホイップクリーム';
     }
 }
 
@@ -1014,29 +1014,29 @@ class VanillaCoffee implements Coffee
 
     public function getDescription()
     {
-        return $this->coffee->getDescription() . ', vanilla';
+        return $this->coffee->getDescription() . ', バニラ';
     }
 }
 ```
 
-Lets make a coffee now
+それではコーヒーを作りましょう。
 
 ```php
 $someCoffee = new SimpleCoffee();
 echo $someCoffee->getCost(); // 10
-echo $someCoffee->getDescription(); // Simple Coffee
+echo $someCoffee->getDescription(); // シンプルなコーヒー
 
 $someCoffee = new MilkCoffee($someCoffee);
 echo $someCoffee->getCost(); // 12
-echo $someCoffee->getDescription(); // Simple Coffee, milk
+echo $someCoffee->getDescription(); // シンプルなコーヒー, ミルク
 
 $someCoffee = new WhipCoffee($someCoffee);
 echo $someCoffee->getCost(); // 17
-echo $someCoffee->getDescription(); // Simple Coffee, milk, whip
+echo $someCoffee->getDescription(); // シンプルなコーヒー, ミルク, ホイップクリーム
 
 $someCoffee = new VanillaCoffee($someCoffee);
 echo $someCoffee->getCost(); // 20
-echo $someCoffee->getDescription(); // Simple Coffee, milk, whip, vanilla
+echo $someCoffee->getDescription(); // シンプルなコーヒー, ミルク, ホイップクリーム, バニラ
 ```
 
 📦 Facade
