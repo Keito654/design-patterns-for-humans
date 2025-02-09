@@ -1039,21 +1039,21 @@ echo $someCoffee->getCost(); // 20
 echo $someCoffee->getDescription(); // シンプルなコーヒー, ミルク, ホイップクリーム, バニラ
 ```
 
-📦 Facade
+📦 ファサード
 ----------------
 
 現実世界の例
-> How do you turn on the computer? "Hit the power button" you say! That is what you believe because you are using a simple interface that computer provides on the outside, internally it has to do a lot of stuff to make it happen. This simple interface to the complex subsystem is a facade.
+> コンピュータの電源をつけるときどうしますか？「電源ボタンを押します」とあなたは答えるでしょう。あなたがそのように信じているのは、コンピュータが外部に提供しているシンプルなインターフェースを利用しているからです。内部では、電源をつけるためたくさんの事を実行しなければいけません。複雑なシステムのシンプルなインターフェースがファサード(Facade/外観)です。
 
 簡単に言えば
-> Facade pattern provides a simplified interface to a complex subsystem.
+> ファサードパターンは複雑なサブシステムに、単純化されたインターフェースを与えます。
 
 Wikipediaによれば
-> A facade is an object that provides a simplified interface to a larger body of code, such as a class library.
+> ファサードはクラスライブラリのような大量のコードに単純化されたインターフェースを与えるオブジェクトです。
 
 **プログラム例**
 
-Taking our computer example from above. Here we have the computer class
+上のコンピュータを例に挙げます。コンピュータクラスを作成します。
 
 ```php
 class Computer
@@ -1075,7 +1075,7 @@ class Computer
 
     public function bam()
     {
-        echo "Ready to be used!";
+        echo "準備完了!";
     }
 
     public function closeEverything()
@@ -1094,7 +1094,7 @@ class Computer
     }
 }
 ```
-Here we have the facade
+ファサードを作成します。
 ```php
 class ComputerFacade
 {
@@ -1121,10 +1121,10 @@ class ComputerFacade
     }
 }
 ```
-Now to use the facade
+ファサードを利用しましょう。
 ```php
 $computer = new ComputerFacade(new Computer());
-$computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+$computer->turnOn(); // Ouch! Beep beep! Loading.. 準備完了!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ```
 
