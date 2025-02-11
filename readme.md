@@ -1128,17 +1128,17 @@ $computer->turnOn(); // Ouch! Beep beep! Loading.. 準備完了!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
 ```
 
-🍃 Flyweight
+🍃 フライウェイト
 ---------
 
 現実世界の例
-> Did you ever have fresh tea from some stall? They often make more than one cup that you demanded and save the rest for any other customer so to save the resources e.g. gas etc. Flyweight pattern is all about that i.e. sharing.
+> 屋台で淹れたてのお茶を飲んだことはありますか？屋台はたいてい、あなたが注文した量よりも多くお茶を作り、残りをほかのお客さんのための取っておきます。そうすることで、燃料などを節約できます。フライウェイトパターンはまさにこれ、つまりシェアすることです。
 
 簡単に言えば
-> It is used to minimize memory usage or computational expenses by sharing as much as possible with similar objects.
+> フライウェイトパターンは似たようなオブジェクトと可能な限り共有を行うことで、メモリ使用量や計算コストを最小限に抑えるため使用されます。
 
 Wikipediaによれば
-> In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
+> コンピュータープログラミングにおいて、フライウェイトはソフトウェアデザインパターンです。フライウェイトは他の似たオブジェクトとデータを可能な限り共有することでメモリ使用量を最小限にするオブジェクトです。単純な繰り返しで表現すると許容できない量のメモリが使用される場合に、大量のオブジェクトを使用する方法です。
 
 **プログラム例**
 
