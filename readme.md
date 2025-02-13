@@ -1142,16 +1142,16 @@ Wikipediaによれば
 
 **プログラム例**
 
-Translating our tea example from above. First of all we have tea types and tea maker
+上のお茶の例をコードにしていきましょう。まず、お茶の型とお茶の製造機を作ります。
 
 ```php
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+// キャッシュされるものはすべてフライウェイトです。
+// ここのお茶の型はフライウェイトです。
 class KarakTea
 {
 }
 
-// Acts as a factory and saves the tea
+// ファクトリーとして振る舞い、作ったお茶を保存します。
 class TeaMaker
 {
     protected $availableTea = [];
@@ -1167,7 +1167,7 @@ class TeaMaker
 }
 ```
 
-Then we have the `TeaShop` which takes orders and serves them
+次に、注文を受け取り、お茶を提供する`TeaShop`を作ります。
 
 ```php
 class TeaShop
@@ -1188,25 +1188,25 @@ class TeaShop
     public function serve()
     {
         foreach ($this->orders as $table => $tea) {
-            echo "Serving tea to table# " . $table;
+            echo "お茶をこのテーブルに提供します： " . $table;
         }
     }
 }
 ```
-And it can be used as below
+以下のように使用できます。
 
 ```php
 $teaMaker = new TeaMaker();
 $shop = new TeaShop($teaMaker);
 
-$shop->takeOrder('less sugar', 1);
-$shop->takeOrder('more milk', 2);
-$shop->takeOrder('without sugar', 5);
+$shop->takeOrder('砂糖少なめ', 1);
+$shop->takeOrder('ミルク多め', 2);
+$shop->takeOrder('砂糖なし', 5);
 
 $shop->serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+// お茶をこのテーブルに提供します： 1
+// お茶をこのテーブルに提供します： 2
+// お茶をこのテーブルに提供します： 5
 ```
 
 🎱 Proxy
