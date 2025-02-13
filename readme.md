@@ -1209,20 +1209,20 @@ $shop->serve();
 // お茶をこのテーブルに提供します： 5
 ```
 
-🎱 Proxy
+🎱プロキシ
 -------------------
 現実世界の例
-> Have you ever used an access card to go through a door? There are multiple options to open that door i.e. it can be opened either using access card or by pressing a button that bypasses the security. The door's main functionality is to open but there is a proxy added on top of it to add some functionality. Let me better explain it using the code example below.
+> ドアを通るためのアクセスカードを使ったことはありますか？ドアを開ける方法は複数あります。例えば、アクセスカードを使う他、セキュリティを迂回できるボタンを押すなどです。ドアの主な機能は開くことですが、追加機能を入れるためのプロキシ（代理人）を加えています。下のコード例でより詳しい説明をします。
 
 簡単に言えば
-> Using the proxy pattern, a class represents the functionality of another class.
+> プロキシパターンを使うことで、あるクラスを別のクラスの機能として表現できます。
 
 Wikipediaによれば
-> A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
+> 最も一般的な形式でのプロキシは他の何かへのインターフェースとして機能するクラスです。プロキシはクライアントによって呼び出され、舞台裏で実際のサービスオブジェクトにアクセスするためのラッパー、もしくはエージェント（代理人）オブジェクトです。プロキシを使うことで実際のオブジェクトをシンプルに転送したり、追加ロジックを提供することができます。プロキシを使うことで、例えば実際のオブジェクトの処理がリソースを大量に消費する場合のキャッシュや、実際のオブジェクトの処理が実行される前に前提条件をチェックするなど、追加の機能を提供できます。
 
 **プログラム例**
 
-Taking our security door example from above. Firstly we have the door interface and an implementation of door
+上のセキュリティドアの例を使いましょう。まず、ドアのインターフェースとその実装を作成します。
 
 ```php
 interface Door
@@ -1235,16 +1235,16 @@ class LabDoor implements Door
 {
     public function open()
     {
-        echo "Opening lab door";
+        echo "研究室のドアが開く";
     }
 
     public function close()
     {
-        echo "Closing the lab door";
+        echo "研究室のドアが閉じる";
     }
 }
 ```
-Then we have a proxy to secure any doors that we want
+次に、ドアを必要に応じてセキュアにするためのプロキシを作ります。
 ```php
 class SecuredDoor implements Door
 {
@@ -1260,7 +1260,7 @@ class SecuredDoor implements Door
         if ($this->authenticate($password)) {
             $this->door->open();
         } else {
-            echo "Big no! It ain't possible.";
+            echo "ドアを開けることは絶対にできない！";
         }
     }
 
@@ -1275,16 +1275,15 @@ class SecuredDoor implements Door
     }
 }
 ```
-And here is how it can be used
+次のように使用できます。
 ```php
 $door = new SecuredDoor(new LabDoor());
-$door->open('invalid'); // Big no! It ain't possible.
+$door->open('invalid'); // ドアを開けることは絶対にできない！
 
-$door->open('$ecr@t'); // Opening lab door
-$door->close(); // Closing lab door
+$door->open('$ecr@t'); // 研究室のドアが開く
+$door->close(); // 研究室のドアが閉じる
 ```
-Yet another example would be some sort of data-mapper implementation. For example, I recently made an ODM (Object Data Mapper) for MongoDB using this pattern where I wrote a proxy around mongo classes while utilizing the magic method `__call()`. All the method calls were proxied to the original mongo class and result retrieved was returned as it is but in case of `find` or `findOne` data was mapped to the required class objects and the object was returned instead of `Cursor`.
-
+もう一つ別の例として、何らかのデータマッパーの実装が挙げられます。例えば、私は最近プロキシパターンを利用してMongoDBのODM(オブジェクト・データ・マッパー)を作成しました。このパターンでは、マジックメソッド`__call()`を活用し、MongoDB公式のクラスの周りにプロキシを書きました。全てのメソッドの呼び出しは元のMongoDB公式のクラスに中継され、取得された結果はそのまま返されます。しかし、`find`もしくは`findOne`を利用しデータを見つける場合、取得したデータはクラスオブジェクトに紐づけられ、そのオブジェクトが`Cursor`(※MongoDBが提供するクラス)の代わりに返されます。
 Behavioral Design Patterns
 ==========================
 
