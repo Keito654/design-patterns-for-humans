@@ -1284,6 +1284,7 @@ $door->open('$ecr@t'); // 研究室のドアが開く
 $door->close(); // 研究室のドアが閉じる
 ```
 もう一つ別の例として、何らかのデータマッパーの実装が挙げられます。例えば、私は最近プロキシパターンを利用してMongoDBのODM(オブジェクト・データ・マッパー)を作成しました。このパターンでは、マジックメソッド`__call()`を活用し、MongoDB公式のクラスの周りにプロキシを書きました。全てのメソッドの呼び出しは元のMongoDB公式のクラスに中継され、取得された結果はそのまま返されます。しかし、`find`もしくは`findOne`を利用しデータを見つける場合、取得したデータはクラスオブジェクトに紐づけられ、そのオブジェクトが`Cursor`(※MongoDBが提供するクラス)の代わりに返されます。
+
 Behavioral Design Patterns
 ==========================
 
@@ -2303,17 +2304,17 @@ $iosBuilder->build();
 // Deploying ios build to server
 ```
 
-## 🚦 Wrap Up Folks
+## 🚦 最後に
 
 And that about wraps it up. I will continue to improve this, so you might want to watch/star this repository to revisit. Also, I have plans on writing the same about the architectural patterns, stay tuned for it.
 
-## 👬 Contribution
+## 👬 コントリビュート
 
-- Report issues
-- Open pull request with improvements
-- Spread the word
-- Reach out with any feedback [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamrify.svg?style=social&label=Follow%20%40kamrify)](https://twitter.com/kamrify)
+- issuesに報告
+- 実装と共にプルリクエストを開く
+- 評判を広める
+- フィードバックを連絡 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamrify.svg?style=social&label=Follow%20%40kamrify)](https://twitter.com/kamrify)
 
-## License
+## ライセンス
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
