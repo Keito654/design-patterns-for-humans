@@ -20,7 +20,7 @@
 
 |[生成に関するデザインパターン](#生成に関するデザインパターン)|[構造に関するデザインパターン](#構造に関するデザインパターン)|[振る舞いに関するデザインパターン](#振る舞いに関するデザインパターン)|
 |:-|:-|:-|
-|[シンプルファクトリー](#-シンプルファクトリー)|[アダプター](#-アダプター)|[チェイン・レスポンシビリティ](#-チェイン・レスポンシビリティ)|
+|[シンプルファクトリー](#-シンプルファクトリー)|[アダプター](#-アダプター)|[チェインレスポンシビリティ](#-チェインレスポンシビリティ)|
 |[ファクトリーメソッド](#-ファクトリーメソッド)|[ブリッジ](#-ブリッジ)|[コマンド](#-コマンド)|
 |[アブストラクトファクトリー](#-アブストラクトファクトリー)|[コンポジット](#-コンポジット)|[イテレーター](#-イテレーター)|
 |[ビルダー](#-ビルダー)|[デコレーター](#-デコレーター)|[メディエーター](#-メディエーター)|
@@ -1209,7 +1209,7 @@ $shop->serve();
 // お茶をこのテーブルに提供します： 5
 ```
 
-🎱プロキシ
+🎱 プロキシ
 -------------------
 現実世界の例
 > ドアを通るためのアクセスカードを使ったことはありますか？ドアを開ける方法は複数あります。例えば、アクセスカードを使う他、セキュリティを迂回できるボタンを押すなどです。ドアの主な機能は開くことですが、追加機能を入れるためのプロキシ（代理人）を加えています。下のコード例でより詳しい説明をします。
@@ -1285,37 +1285,37 @@ $door->close(); // 研究室のドアが閉じる
 ```
 もう一つ別の例として、何らかのデータマッパーの実装が挙げられます。例えば、私は最近プロキシパターンを利用してMongoDBのODM(オブジェクト・データ・マッパー)を作成しました。このパターンでは、マジックメソッド`__call()`を活用し、MongoDB公式のクラスの周りにプロキシを書きました。全てのメソッドの呼び出しは元のMongoDB公式のクラスに中継され、取得された結果はそのまま返されます。しかし、`find`もしくは`findOne`を利用しデータを見つける場合、取得したデータはクラスオブジェクトに紐づけられ、そのオブジェクトが`Cursor`(※MongoDBが提供するクラス)の代わりに返されます。
 
-Behavioral Design Patterns
+振る舞いに関するパターン
 ==========================
 
 簡単に言えば
-> It is concerned with assignment of responsibilities between the objects. What makes them different from structural patterns is they don't just specify the structure but also outline the patterns for message passing/communication between them. Or in other words, they assist in answering "How to run a behavior in software component?"
+> オブジェクト間の責任の割り当てに関係します。構造に関するパターンと異なるのは、単にオブジェクトの構造を決めるだけでなく、オブジェクト間のメッセージの受け渡し/通信も示す点です。言い換えると、これらは「ソフトウェアコンポーネントの中でどのように振る舞い(動作)を実行するか」という問いに答えるのに役立ちます。
 
 Wikipediaによれば
-> In software engineering, behavioral design patterns are design patterns that identify common communication patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.
+> ソフトウェア開発において、振る舞いに関するデザインパターンとはオブジェクト間の共通的な通信パターンを識別し、これらを実現するパターンです。このパターンを用いる事で、通信を実施する際の柔軟性を高めることができます。
 
-* [Chain of Responsibility](#-chain-of-responsibility)
-* [Command](#-command)
-* [Iterator](#-iterator)
-* [Mediator](#-mediator)
-* [Memento](#-memento)
-* [Observer](#-observer)
-* [Visitor](#-visitor)
-* [Strategy](#-strategy)
-* [State](#-state)
-* [Template Method](#-template-method)
+* [チェインレスポンシビリティ](#-チェインレスポンシビリティ)
+* [コマンド](#-コマンド)
+* [イテレーター](#-イテレーター)
+* [メディエーター](#-メディエーター)
+* [メメント](#-メメント)
+* [オブザーバー](#-オブザーバー)
+* [ビジター](#-ビジター)
+* [ストラテジ](#-ストラテジ)
+* [ステート](#-ステート)
+* [テンプレートメソッド](#-テンプレートメソッド)
 
-🔗 Chain of Responsibility
+🔗 チェインレスポンシビリティ
 -----------------------
 
 現実世界の例
-> For example, you have three payment methods (`A`, `B` and `C`) setup in your account; each having a different amount in it. `A` has 100 USD, `B` has 300 USD and `C` having 1000 USD and the preference for payments is chosen as `A` then `B` then `C`. You try to purchase something that is worth 210 USD. Using Chain of Responsibility, first of all account `A` will be checked if it can make the purchase, if yes purchase will be made and the chain will be broken. If not, request will move forward to account `B` checking for amount if yes chain will be broken otherwise the request will keep forwarding till it finds the suitable handler. Here `A`, `B` and `C` are links of the chain and the whole phenomenon is Chain of Responsibility.
+> 例えば、あなたの口座に3つの支払い方法（`A`, `B`, `C`）の設定があります。それぞれ、支払える金額が異なります。`A`は100ドル、`B`は300ドル、`C`は1000ドルです。また、支払い方法の優先順位は`A`→ `B`→`C`となっています。今、あなたは210ドルのものを買おうとしています。チェインレスポンシビリティ（責任の連鎖）を使用すると、初めに支払い方法`A`で購入可能かどうかチェックされます。もし可能であべば商品を購入し、それ以上リクエストは転送されません。もし不可能であれば、支払い方法`B`にリクエストは転送され金額をチェックされます。購入可能ならリクエストの転送はされませんが、不可能な場合、適切なハンドラを見つけるまでリクエストは転送されつづけます。ここでの`A`,`B`,`C`は繋がっており、この全体的な現象をチェインレスポンシビリティ（責任の連鎖）と呼びます。
 
 簡単に言えば
-> It helps building a chain of objects. Request enters from one end and keeps going from object to object till it finds the suitable handler.
+> オブジェクトの連鎖順序の作成に役立ちます。リクエストがある1つの箇所に入力されると、適切なハンドラが見つかるまでオブジェクト間を移動し続けます。
 
 Wikipediaによれば
-> In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
+> オブジェクト指向デザインにおいて、チェインオブレスポンシビリティパターンはコマンドオブジェクトと一連の処理オブジェクトで構成されるパターンです。各処理オブジェクトには扱えるコマンドの種類を定義するロジックが含まれており、残りはチェーンの中の次の処理オブジェクトへと渡されます。
 
 **プログラム例**
 
