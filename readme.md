@@ -1534,15 +1534,16 @@ $remote->submit($turnOff); // 真っ暗です!
 > オブジェクトの内部表現を公開することなく、要素にアクセスする方法を提供します。
 
 Wikipediaによれば
-> In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
+> オブジェクト指向プログラミングにおいて、イテレーターパターンはコンテナを横断し、コンテナの要素にアクセスするためにイテレーターを用いるデザインパターンです。イテレーターパターンはコンテナからアルゴリズムを分離します。場合によっては、アルゴリズムは必然的にコンテナ固有であるため、分離することができないこともあります。
 
 **プログラム例**
 
-In PHP it is quite easy to implement using SPL (Standard PHP Library). Translating our radio stations example from above. First of all we have `RadioStation`
+PHPではSPL(Standard PHP Library/スタンダート・PHP・ライブラリ)を用いることでとても簡単に実装することができます。上のラジオステーションの例をコードにしてみましょう。まず、`RadioStation`クラスを作成します。
 
 ```php
 class RadioStation
 {
+    // 周波数
     protected $frequency;
 
     public function __construct(float $frequency)
@@ -1556,7 +1557,7 @@ class RadioStation
     }
 }
 ```
-Then we have our iterator
+次にイテレーターを作ります。
 
 ```php
 use Countable;
@@ -1614,7 +1615,7 @@ class StationList implements Countable, Iterator
     }
 }
 ```
-And then it can be used as
+これらをは以下のように使用できます。
 ```php
 $stationList = new StationList();
 
@@ -1627,7 +1628,7 @@ foreach($stationList as $station) {
     echo $station->getFrequency() . PHP_EOL;
 }
 
-$stationList->removeStation(new RadioStation(89)); // Will remove station 89
+$stationList->removeStation(new RadioStation(89)); // ステーション89が削除される
 ```
 
 👽 Mediator
