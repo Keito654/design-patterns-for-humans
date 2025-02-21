@@ -1524,14 +1524,14 @@ $remote->submit($turnOff); // 真っ暗です!
 
 コマンドパターンはトランザクションが必要なシステムを実装する際にも用いられます。コマンドを実行するとすぐに、コマンドの履歴が保存されます。最後のコマンドが成功した場合問題ありませんが、それ以外の場合、履歴を遡り、実行されたすべてのコマンドに`元に戻す/undo`を行うことができます。
 
-➿ Iterator
+➿ イテレーター
 --------
 
 現実世界の例
-> An old radio set will be a good example of iterator, where user could start at some channel and then use next or previous buttons to go through the respective channels. Or take an example of MP3 player or a TV set where you could press the next and previous buttons to go through the consecutive channels or in other words they all provide an interface to iterate through the respective channels, songs or radio stations.  
+> 古いラジオはイテレーターのいい例です。ユーザーはあるチャンネルからスタートし、 次、もしくは前ボタンでそれぞれのチャンネルに移動できます。もしくは、次、前ボタンで連続したチャンネルの移動ができるMP3プレイヤーかTVもいい例です。これらはすべて、曲もしくはラジオステーションのようなチャンネルそれぞれを繰り返しながら移動できるインターフェースを提供しています。
 
 簡単に言えば
-> It presents a way to access the elements of an object without exposing the underlying presentation.
+> オブジェクトの内部表現を公開することなく、要素にアクセスする方法を提供します。
 
 Wikipediaによれば
 > In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.
