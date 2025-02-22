@@ -1703,24 +1703,24 @@ $jane->send('こんにちは!');
 // Feb 14, 10:58 [ジェーン・ドゥ]: こんにちは!
 ```
 
-💾 Memento
+💾 メメント
 -------
 現実世界の例
-> Take the example of calculator (i.e. originator), where whenever you perform some calculation the last calculation is saved in memory (i.e. memento) so that you can get back to it and maybe get it restored using some action buttons (i.e. caretaker).
+> 電卓(=originator/オリジネーター)を例にとって考えてみましょう。電卓で計算を行う旅、最後の計算結果がメモリ（=memento/メメント）に保持されます。これにより、保持された結果に戻ったり、操作ボタン（=caretaker/ケアテーカー）を使って結果を復元することが可能になります。
 
 簡単に言えば
-> Memento pattern is about capturing and storing the current state of an object in a manner that it can be restored later on in a smooth manner.
+> メメントパターンは、後でスムーズに復元できるようにするため、オブジェクトの現在の状態をキャプチャし保管しておく方法です。
 
 Wikipediaによれば
-> The memento pattern is a software design pattern that provides the ability to restore an object to its previous state (undo via rollback).
+> メメントパターンは以前の状態にオブジェクトを復元する（ロールバックを通して元に戻す）方法を提供するデザインパターンです。
 
-Usually useful when you need to provide some sort of undo functionality.
+一般的に、元に戻すような機能が必要な場合に役に立ちます。
 
 **プログラム例**
 
-Lets take an example of text editor which keeps saving the state from time to time and that you can restore if you want.
+時折状態を保存し続け、状態を復元することができるテキストエディタを例に見てみましょう。
 
-First of all we have our memento object that will be able to hold the editor state
+まず、エディタの状態を保持できるmementoオブジェクトを作成します。
 
 ```php
 class EditorMemento
@@ -1739,7 +1739,7 @@ class EditorMemento
 }
 ```
 
-Then we have our editor i.e. originator that is going to use memento object
+次に、mementoオブジェクトを利用することになるエディタ（=originator）を作成します。
 
 ```php
 class Editor
@@ -1768,28 +1768,28 @@ class Editor
 }
 ```
 
-And then it can be used as
+これらは以下のように利用できます。
 
 ```php
 $editor = new Editor();
 
-// Type some stuff
-$editor->type('This is the first sentence.');
-$editor->type('This is second.');
+// 何か入力する
+$editor->type('これは最初の文章です。');
+$editor->type('これは2番目です。');
 
-// Save the state to restore to : This is the first sentence. This is second.
+// 「これは最初の文章です。これは2番目です。」を復元するために状態を保存する。
 $saved = $editor->save();
 
-// Type some more
-$editor->type('And this is third.');
+// さらに入力する
+$editor->type('そして3番目です。');
 
-// Output: Content before Saving
-echo $editor->getContent(); // This is the first sentence. This is second. And this is third.
+// 出力：保存する前のテキストコンテンツ
+echo $editor->getContent(); // これは最初の文章です。これは2番目です。そして3番目です。
 
-// Restoring to last saved state
+// 最後に保存した状態を復元
 $editor->restore($saved);
 
-$editor->getContent(); // This is the first sentence. This is second.
+$editor->getContent(); // これは最初の文章です。これは2番目です。
 ```
 
 😎 Observer
