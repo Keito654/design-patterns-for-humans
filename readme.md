@@ -1631,23 +1631,23 @@ foreach($stationList as $station) {
 $stationList->removeStation(new RadioStation(89)); // ステーション89が削除される
 ```
 
-👽 Mediator
+👽 メディエーター
 ========
 
 現実世界の例
-> A general example would be when you talk to someone on your mobile phone, there is a network provider sitting between you and them and your conversation goes through it instead of being directly sent. In this case network provider is mediator.
+> 一般的な例として、スマートフォンで誰かと通話している状況が挙げられます。このとき、ネットワークプロバイダーがあなたと通話相手の間にいて、会話は直接相手に届けられるのではなく、このネットワークプロバイダーを経由して届きます。このネットワークプロバイダーがメディエーター(mediator/仲介者)です。
 
 簡単に言えば
-> Mediator pattern adds a third party object (called mediator) to control the interaction between two objects (called colleagues). It helps reduce the coupling between the classes communicating with each other. Because now they don't need to have the knowledge of each other's implementation.
+> メディエーターパターンは2つのオブジェクト（colleagues/同僚と呼ばれる）同士の通信をコントロールするためサードパーティオブジェクト（mediator/仲介者と呼ばれる）を追加します。このパターンはお互いにコミュニケーションを行うクラスの結合度を減らすことに役立ちます。なぜなら、これらのクラスはお互いの実装の詳細を知っている必要がないからです。
 
 Wikipediaによれば
-> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+> ソフトウェア開発において、メディエーターパターンは一連のオブジェクトの通信方法をカプセル化するオブジェクトを定義します。このパターンはプログラム実行時の振る舞いを置き換える方法であるため、振る舞いに関するパターンであると考えられています。
 
 **プログラム例**
 
-Here is the simplest example of a chat room (i.e. mediator) with users (i.e. colleagues) sending messages to each other.
+チャットルーム（すなわちmediator）で、ユーザー（すなわちcolleagues）がお互いにメッセージを送るシンプルな例を考えてみましょう。
 
-First of all, we have the mediator i.e. the chat room
+まず、チャットルーム、つまりmediatorをつくります。
 
 ```php
 interface ChatRoomMediator 
@@ -1668,7 +1668,7 @@ class ChatRoom implements ChatRoomMediator
 }
 ```
 
-Then we have our users i.e. colleagues
+次にユーザー、つまりcolleaguesをつくります。
 ```php
 class User {
     protected $name;
@@ -1688,19 +1688,19 @@ class User {
     }
 }
 ```
-And the usage
+以下が使用方法です。
 ```php
 $mediator = new ChatRoom();
 
-$john = new User('John Doe', $mediator);
-$jane = new User('Jane Doe', $mediator);
+$john = new User('ジョン・ドゥ', $mediator);
+$jane = new User('ジェーン・ドゥ', $mediator);
 
-$john->send('Hi there!');
-$jane->send('Hey!');
+$john->send('やあ!');
+$jane->send('こんにちは!');
 
-// Output will be
-// Feb 14, 10:58 [John]: Hi there!
-// Feb 14, 10:58 [Jane]: Hey!
+// 出力
+// Feb 14, 10:58 [ジョン・ドゥ]: やあ!
+// Feb 14, 10:58 [ジェーン・ドゥ]: こんにちは!
 ```
 
 💾 Memento
