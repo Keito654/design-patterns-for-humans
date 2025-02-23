@@ -1792,20 +1792,20 @@ $editor->restore($saved);
 $editor->getContent(); // これは最初の文章です。これは2番目です。
 ```
 
-😎 Observer
+😎 オブザーバー
 --------
 現実世界の例
-> A good example would be the job seekers where they subscribe to some job posting site and they are notified whenever there is a matching job opportunity.   
+> 職を探している人がいい例でしょう。彼らは求人サイトに登録しており、マッチする仕事があればその都度通知が届きます。
 
 簡単に言えば
-> Defines a dependency between objects so that whenever an object changes its state, all its dependents are notified.
+> オブジェクト間の依存関係を定義することで、ある1つのオブジェクトの状態が変更されたとき、すべての依存オブジェクトに通知されます。
 
 Wikipediaによれば
-> The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
+> オブザーバーパターンは、サブジェクトと呼ばれるオブジェクトが依存オブジェクト（オブザーバーと呼ばれる）のリストを保持し、通常オブザーバーのメソッドを呼ぶことにより、状態の変更を自動的に通知するソフトウェアデザインパターンです。
 
 **プログラム例**
 
-Translating our example from above. First of all we have job seekers that need to be notified for a job posting
+上の例をコードに置き換えてみましょう。まず、求人情報の通知が必要な求職者をつくります。
 ```php
 class JobPost
 {
@@ -1833,12 +1833,12 @@ class JobSeeker implements Observer
 
     public function onJobPosted(JobPost $job)
     {
-        // Do something with the job posting
-        echo 'Hi ' . $this->name . '! New job posted: '. $job->getTitle();
+        // 求人情報が入ってきた場合に処理を実行する
+        echo 'こんにちは、' . $this->name . '! 新しい求人情報が見つかりました: '. $job->getTitle();
     }
 }
 ```
-Then we have our job postings to which the job seekers will subscribe
+次に求職者が登録する就職エージェントを作成します。
 ```php
 class EmploymentAgency implements Observable
 {
@@ -1862,23 +1862,23 @@ class EmploymentAgency implements Observable
     }
 }
 ```
-Then it can be used as
+これらは以下のように使用できます。
 ```php
-// Create subscribers
-$johnDoe = new JobSeeker('John Doe');
-$janeDoe = new JobSeeker('Jane Doe');
+// 購読者を作成します。
+$johnDoe = new JobSeeker('ジョン・ドゥ');
+$janeDoe = new JobSeeker('ジェーン・ドゥ');
 
-// Create publisher and attach subscribers
+// 発行者を作成し、購読者を登録します。
 $jobPostings = new EmploymentAgency();
 $jobPostings->attach($johnDoe);
 $jobPostings->attach($janeDoe);
 
-// Add a new job and see if subscribers get notified
-$jobPostings->addJob(new JobPost('Software Engineer'));
+// 新しい求人を登録し、購読者が通知を受け取るか確認します。
+$jobPostings->addJob(new JobPost('ソフトウェアエンジニア'));
 
 // Output
-// Hi John Doe! New job posted: Software Engineer
-// Hi Jane Doe! New job posted: Software Engineer
+// こんにちは、ジョン・ドゥ! 新しい仕事が見つかりました: ソフトウェアエンジニア
+// こんにちは、ジェーン・ドゥ! : 新しい仕事が見つかりました: ソフトウェアエンジニア
 ```
 
 🏃 Visitor
