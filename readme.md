@@ -1992,32 +1992,32 @@ class Jump implements AnimalOperation
 {
     public function visitMonkey(Monkey $monkey)
     {
-        echo 'Jumped 20 feet high! on to the tree!';
+        echo '6メートルのジャンプ!木の上に飛び乗った！';
     }
 
     public function visitLion(Lion $lion)
     {
-        echo 'Jumped 7 feet! Back on the ground!';
+        echo '2メートルのジャンプ！地面に戻った！';
     }
 
     public function visitDolphin(Dolphin $dolphin)
     {
-        echo 'Walked on water a little and disappeared';
+        echo '水面を少し歩いて消えた';
     }
 }
 ```
-And for the usage
+使用例はこちらです。
 ```php
 $jump = new Jump();
 
-$monkey->accept($speak);   // Ooh oo aa aa!
-$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
+$monkey->accept($speak);   // ウキキ!
+$monkey->accept($jump);    // 6メートルのジャンプ!木の上に飛び乗った！
 
-$lion->accept($speak);     // Roaaar!
-$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
+$lion->accept($speak);     // ガオー!
+$lion->accept($jump);      // 2メートルのジャンプ！地面に戻った！
 
-$dolphin->accept($speak);  // Tuut tutt tuutt!
-$dolphin->accept($jump);   // Walked on water a little and disappeared
+$dolphin->accept($speak);  // ピィーピィー!
+$dolphin->accept($jump);   // 水面を少し歩いて消えた
 ```
 
 💡 Strategy
