@@ -1881,29 +1881,29 @@ $jobPostings->addJob(new JobPost('ソフトウェアエンジニア'));
 // こんにちは、ジェーン・ドゥ! : 新しい仕事が見つかりました: ソフトウェアエンジニア
 ```
 
-🏃 Visitor
+🏃 ビジター
 -------
 現実世界の例
-> Consider someone visiting Dubai. They just need a way (i.e. visa) to enter Dubai. After arrival, they can come and visit any place in Dubai on their own without having to ask for permission or to do some leg work in order to visit any place here; just let them know of a place and they can visit it. Visitor pattern lets you do just that, it helps you add places to visit so that they can visit as much as they can without having to do any legwork.
+> ドバイを訪問しようとしている人を考えてみましょう。彼に必要なのはドバイに入る方法（例えば入国ビザ）だけです。到着した後は、ドバイのどこへでも、許可を求めたり事前準備することなく、自由に訪れることができます。場所を知るだけで訪れることができます。ビジターパターンを使用するとまさにそれが可能になります。訪問する場所を追加することで、訪問者が多くの場所を手間をかけずに訪れることができるようになります。
 
 簡単に言えば
-> Visitor pattern lets you add further operations to objects without having to modify them.
+> ビジターパターンはオブジェクトに変更を加えることなく、より多くの操作を追加することができます。
 
 Wikipediaによれば
-> In object-oriented programming and software engineering, the visitor design pattern is a way of separating an algorithm from an object structure on which it operates. A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. It is one way to follow the open/closed principle.
+> オブジェクト指向プログラミングやソフトウェア開発において、ビジターデザインパターンはアルゴリズムと、そのアルゴリズムが操作するオブジェクト構造を分離するものです。この分離の実際の結果として、既存のオブジェクト構造に変更を加えることなく、新しい操作を追加できるようになります。これはオープン・クローズドの原則に従う方法の１つです。
 
 **プログラム例**
 
-Let's take an example of a zoo simulation where we have several different kinds of animals and we have to make them Sound. Let's translate this using visitor pattern
+いろんな種類の動物がおり、鳴き声を聞くことができる動物園のシミュレーションを例に取ります。ビジターパターンを使って実装してみましょう。
 
 ```php
-// Visitee
+// 訪問される側
 interface Animal
 {
     public function accept(AnimalOperation $operation);
 }
 
-// Visitor
+// 訪問者
 interface AnimalOperation
 {
     public function visitMonkey(Monkey $monkey);
@@ -1911,13 +1911,13 @@ interface AnimalOperation
     public function visitDolphin(Dolphin $dolphin);
 }
 ```
-Then we have our implementations for the animals
+動物の実装を作ります。
 ```php
 class Monkey implements Animal
 {
     public function shout()
     {
-        echo 'Ooh oo aa aa!';
+        echo 'ウキキ!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1930,7 +1930,7 @@ class Lion implements Animal
 {
     public function roar()
     {
-        echo 'Roaaar!';
+        echo 'ガオー!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1943,7 +1943,7 @@ class Dolphin implements Animal
 {
     public function speak()
     {
-        echo 'Tuut tuttu tuutt!';
+        echo 'ピィーピィー!';
     }
 
     public function accept(AnimalOperation $operation)
@@ -1952,7 +1952,7 @@ class Dolphin implements Animal
     }
 }
 ```
-Let's implement our visitor
+訪問者を実装しましょう。
 ```php
 class Speak implements AnimalOperation
 {
@@ -1973,7 +1973,7 @@ class Speak implements AnimalOperation
 }
 ```
 
-And then it can be used as
+以下のように使用します。
 ```php
 $monkey = new Monkey();
 $lion = new Lion();
@@ -1981,11 +1981,11 @@ $dolphin = new Dolphin();
 
 $speak = new Speak();
 
-$monkey->accept($speak);    // Ooh oo aa aa!    
-$lion->accept($speak);      // Roaaar!
-$dolphin->accept($speak);   // Tuut tutt tuutt!
+$monkey->accept($speak);    // ウキキ!    
+$lion->accept($speak);      // ガオー!
+$dolphin->accept($speak);   // ピィーピィー!
 ```
-We could have done this simply by having an inheritance hierarchy for the animals but then we would have to modify the animals whenever we would have to add new actions to animals. But now we will not have to change them. For example, let's say we are asked to add the jump behavior to the animals, we can simply add that by creating a new visitor i.e.
+単純に、動物に継承階層を持たせることでこれを実現することもできます。しかしその後、新しい行動を動物に追加する必要がある度、動物オブジェクトを修正する必要がでてくるでしょう。ですが今は動物オブジェクトを修正する必要はありません。例えば、動物オブジェクトにジャンプする行動を追加したいと言われたときは、新しい訪問者オブジェクトを作ることでシンプルに作ることができます。
 
 ```php
 class Jump implements AnimalOperation
