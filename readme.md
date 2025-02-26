@@ -2103,21 +2103,21 @@ $sorter->sort($smalldataset); // 出力 : バブルソートでソートしま�
 $sorter->sort($bigdataset); // 出力 : クイックソートでソートします
 ```
 
-💢 State
+💢 ステート
 -----
 現実世界の例
-> Imagine you are using some drawing application, you choose the paint brush to draw. Now the brush changes its behavior based on the selected color i.e. if you have chosen red color it will draw in red, if blue then it will be in blue etc.  
+> 絵を描くアプリケーションを使っていて、ペイントブラシを選択したところを想像してください。ブラシは選択した色によってその振る舞いを変化させます。例えば、あなたが赤色を選択したら赤色で描写され、青色を選択したら青色で描写されます。
 
 簡単に言えば
-> It lets you change the behavior of a class when the state changes.
+> 状態（state/ステート）が変化したときにクラスの振る舞いを変化させることができます。
 
 Wikipediaによれば
-> The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way. With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
-> The state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through invocations of methods defined in the pattern's interface.
+> ステートパターンはオブジェクト指向な方法でステートマシンを実装する、振る舞いにかんするソフトウェアデザインパターンです。ステートパターンでは、個々の状態をステートパターンのインターフェースの派生クラスで作り、状態の遷移をステートパターンのスーパークラスで定義されるメソッドの呼び出しとして作ることで、ステートマシンを実装します。
+> ステートパターンは、パターンのインターフェースで定義されるメソッドの呼び出しによって現在の戦略を切り替えられるため、ストラテジパターンの一種であると解釈することもできます。
 
 **プログラム例**
 
-Let's take an example of a phone. First of all we have our state interface and some state implementations
+電話を例にしてみましょう。まず、状態のインターフェースとその実装を作成します。
 
 ```php
 interface PhoneState {
@@ -2126,22 +2126,25 @@ interface PhoneState {
     public function dial(): PhoneState;
 }
 
-// states implementation
+// 状態の実装
+
+// アイドル：受話器を置いている状態。
 class PhoneStateIdle implements PhoneState {
     public function pickUp(): PhoneState {
         return new PhoneStatePickedUp();
     }
     public function hangUp(): PhoneState {
-        throw new Exception("already idle");
+        throw new Exception("すでにアイドル中です");
     }
     public function dial(): PhoneState {
-        throw new Exception("unable to dial in idle state");
+        throw new Exception("アイドル中に電話をかけることはできません。");
     }
 }
 
+// ピックアップ：受話器を取っている状態
 class PhoneStatePickedUp implements PhoneState {
     public function pickUp(): PhoneState {
-        throw new Exception("already picked up");
+        throw new Exception("すでに受話器を取っています。");
     }
     public function hangUp(): PhoneState {
         return new PhoneStateIdle();
@@ -2151,20 +2154,21 @@ class PhoneStatePickedUp implements PhoneState {
     }
 }
 
+// コーリング：電話をかけている状態
 class PhoneStateCalling implements PhoneState {
     public function pickUp(): PhoneState {
-        throw new Exception("already picked up");
+        throw new Exception("すでに受話器を取っています。");
     }
     public function hangUp(): PhoneState {
         return new PhoneStateIdle();
     }
     public function dial(): PhoneState {
-        throw new Exception("already dialing");
+        throw new Exception("すでに電話をかけています。");
     }
 }
 ```
 
-Then we have our Phone class that changes the state on different behavior calls
+次に、さまざまな動作の呼び出しがあったときに状態を変更する、電話クラスを実装します。
 
 ```php
 class Phone {
@@ -2185,7 +2189,7 @@ class Phone {
 }
 ```
 
-And then it can be used as follows and it will call the relevant state methods:
+以下のように使用することで、関連する状態のメソッドを呼び出します。
 
 ```php
 $phone = new Phone();
