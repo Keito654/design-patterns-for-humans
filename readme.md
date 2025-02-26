@@ -2020,21 +2020,21 @@ $dolphin->accept($speak);  // ピィーピィー!
 $dolphin->accept($jump);   // 水面を少し歩いて消えた
 ```
 
-💡 Strategy
+💡 ストラテジ
 --------
 
 現実世界の例
-> Consider the example of sorting, we implemented bubble sort but the data started to grow and bubble sort started getting very slow. In order to tackle this we implemented Quick sort. But now although the quick sort algorithm was doing better for large datasets, it was very slow for smaller datasets. In order to handle this we implemented a strategy where for small datasets, bubble sort will be used and for larger, quick sort.
+> ソートについて考えてみましょう。私たちは最初、バブルソートを実装しました。しかし、データが大きくなり始め、バブルソートはとても遅くなりました。この問題に対処するため、私たちはクイックソートを実装しました。しかし、大きなデータセットには効果的だったクイックソートですが、小さなデータセットではとても遅いです。これに対処するため、小さなデータセットではバブルソートを、大きなデータセットではクイックソートを使う戦略(strategy/ストラテジ)を取ることにしました。
 
 簡単に言えば
-> Strategy pattern allows you to switch the algorithm or strategy based upon the situation.
+> ストラテジパターンは状況に応じてアルゴリズム、もしくは戦略を切り替えることを可能にします。
 
 Wikipediaによれば
-> In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design pattern that enables an algorithm's behavior to be selected at runtime.
+> コンピュータープログラミングにおいて、ストラテジパターン（ポリシーパターンとしても知られる）は振る舞いに関するデザインパターンです。実行時にアルゴリズムの動作を選択することが可能になります。
 
 **プログラム例**
 
-Translating our example from above. First of all we have our strategy interface and different strategy implementations
+上の例をコードにしてみましょう。まず、戦略のインターフェースを作り、いくつかの戦略を実装します。
 
 ```php
 interface SortStrategy
@@ -2046,9 +2046,9 @@ class BubbleSortStrategy implements SortStrategy
 {
     public function sort(array $dataset): array
     {
-        echo "Sorting using bubble sort";
+        echo "バブルソートでソートします";
 
-        // Do sorting
+        // ソートを実行する
         return $dataset;
     }
 }
@@ -2057,15 +2057,15 @@ class QuickSortStrategy implements SortStrategy
 {
     public function sort(array $dataset): array
     {
-        echo "Sorting using quick sort";
+        echo "クイックソートでソートします";
 
-        // Do sorting
+        // ソートを実行する
         return $dataset;
     }
 }
 ```
 
-And then we have our client that is going to use any strategy
+そして、戦略を利用することになるクライアントを実装します。
 ```php
 class Sorter
 {
@@ -2088,16 +2088,19 @@ class Sorter
     }
 }
 ```
-And it can be used as
+これは以下のように使用できます。
 ```php
+// 小さなデータセット
 $smalldataset = [1, 3, 4, 2];
+
+// 大きなデータセット
 $bigdataset = [1, 4, 3, 2, 8, 10, 5, 6, 9, 7];
 
 $sorter = new Sorter(new BubbleSortStrategy(), new QuickSortStrategy());
 
-$sorter->sort($dataset); // Output : Sorting using bubble sort
+$sorter->sort($smalldataset); // 出力 : バブルソートでソートします
 
-$sorter->sort($bigdataset); // Output : Sorting using quick sort
+$sorter->sort($bigdataset); // 出力 : クイックソートでソートします
 ```
 
 💢 State
