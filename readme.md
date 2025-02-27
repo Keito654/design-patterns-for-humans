@@ -2314,15 +2314,20 @@ $iosBuilder->build();
 
 ## 🚦 最後に
 
-And that about wraps it up. I will continue to improve this, so you might want to watch/star this repository to revisit. Also, I have plans on writing the same about the architectural patterns, stay tuned for it.
+これで終わりです。これからもこの記事を改良し続けいくつもりなので、見直すためにこのレポジトリをwatch/starするといいかもしれません。さらに、アーキテクチャのパターンについて同じような記事を書く計画をしています。ご期待ください。
 
 ## 👬 コントリビュート
 
 - issuesに報告
-- 実装と共にプルリクエストを開く
+- 実装しプルリクエストを開く
 - 評判を広める
 - フィードバックを連絡 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamrify.svg?style=social&label=Follow%20%40kamrify)](https://twitter.com/kamrify)
 
 ## ライセンス
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+
+## 翻訳者追記
+
+英語は決して得意ではありませんが、なんとか翻訳できました。もし翻訳の間違いがあれば遠慮なく連絡してください。
