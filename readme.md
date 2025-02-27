@@ -2198,34 +2198,34 @@ $phone->pickUp();
 $phone->dial();
 ```
 
-📒 Template Method
+📒 テンプレートメソッド
 ---------------
 
 現実世界の例
-> Suppose we are getting some house built. The steps for building might look like
-> - Prepare the base of house
-> - Build the walls
-> - Add roof
-> - Add other floors
+> これから家を建てるとします。建築する手順は以下のようになります：
+> - 家の基礎を用意する
+> - 壁を作る
+> - 屋根をつける
+> - 他のフロアを追加する
 
-> The order of these steps could never be changed i.e. you can't build the roof before building the walls etc but each of the steps could be modified for example walls can be made of wood or polyester or stone.
+> この手順の並び順は変えることはできません。例えば、壁を作る前に屋根をつけることはできないでしょう。しかし、それぞれの手順自体は変更することができます。例えば、壁の材料を木、ポリエステル、石などに変更することが可能です。
 
 簡単に言えば
-> Template method defines the skeleton of how a certain algorithm could be performed, but defers the implementation of those steps to the children classes.
+> テンプレートメソッドはあるアルゴリズムがどのように実行されるかの骨組みを定義しますが、各ステップの実装は子クラスに委ねます。
 
 Wikipediaによれば
-> In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
+> ソフトウェアエンジニアリングにおいて、テンプレートメソッドパターンは、操作内のアルゴリズムの骨組みを定義し、いくつかのステップをサブクラスに委ねる、振る舞いに関するデザインパターンです。これは、アルゴリズムの構造を変えることなく、アルゴリズムのあるステップを再定義することを可能とします。
 
 **プログラム例**
 
-Imagine we have a build tool that helps us test, lint, build, generate build reports (i.e. code coverage reports, linting report etc) and deploy our app on the test server.
+あるビルドツールを考えてみましょう。このツールはテスト、コードリント、ビルド、ビルドレポートの作成（例えばコードカバレッジや、リンティングレポートなど）、そしてテストサーバへのデプロイを行います。
 
-First of all we have our base class that specifies the skeleton for the build algorithm
+最初に、ビルドアルゴリズムの骨組みを指定するベースクラスを作成します。
 ```php
 abstract class Builder
 {
 
-    // Template method
+    // テンプレートメソッド
     final public function build()
     {
         $this->test();
@@ -2241,29 +2241,29 @@ abstract class Builder
 }
 ```
 
-Then we can have our implementations
+次に、この抽象クラスを実装します。
 
 ```php
 class AndroidBuilder extends Builder
 {
     public function test()
     {
-        echo 'Running android tests';
+        echo 'Androidのテスト';
     }
 
     public function lint()
     {
-        echo 'Linting the android code';
+        echo 'Androidのコードのリント';
     }
 
     public function assemble()
     {
-        echo 'Assembling the android build';
+        echo 'Androidビルドのアセンブル';
     }
 
     public function deploy()
     {
-        echo 'Deploying android build to server';
+        echo 'Androidビルドをサーバにデプロイ';
     }
 }
 
@@ -2271,45 +2271,45 @@ class IosBuilder extends Builder
 {
     public function test()
     {
-        echo 'Running ios tests';
+        echo 'iOSのテスト';
     }
 
     public function lint()
     {
-        echo 'Linting the ios code';
+        echo 'iOSのコードのリント';
     }
 
     public function assemble()
     {
-        echo 'Assembling the ios build';
+        echo 'iOSビルドのアセンブル';
     }
 
     public function deploy()
     {
-        echo 'Deploying ios build to server';
+        echo 'iOSビルドをサーバにデプロイ';
     }
 }
 ```
-And then it can be used as
+以下のように使用します。
 
 ```php
 $androidBuilder = new AndroidBuilder();
 $androidBuilder->build();
 
-// Output:
-// Running android tests
-// Linting the android code
-// Assembling the android build
-// Deploying android build to server
+// 出力:
+// Androidのテスト
+// Androidのコードのリント
+// Androidビルドのアセンブル
+// Androidビルドをサーバにデプロイ
 
 $iosBuilder = new IosBuilder();
 $iosBuilder->build();
 
-// Output:
-// Running ios tests
-// Linting the ios code
-// Assembling the ios build
-// Deploying ios build to server
+// 出力:
+// iOSのテスト
+// iOSのコードのリント
+// iOSビルドのアセンブル
+// iOSビルドをサーバにデプロイ
 ```
 
 ## 🚦 最後に
